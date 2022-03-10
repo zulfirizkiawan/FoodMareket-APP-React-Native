@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {IcBack} from '../../../assets';
+import {ICBack} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
 const Header = ({title, subTitle, onBack}) => {
@@ -9,7 +9,7 @@ const Header = ({title, subTitle, onBack}) => {
       {onBack && (
         <TouchableOpacity activeOpacity={0.7} onPress={onBack}>
           <View style={styles.back}>
-            <IcBack />
+            <ICBack />
           </View>
         </TouchableOpacity>
       )}

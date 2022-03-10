@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   }),
   text: color => ({
-    fontSize: 14,
-    fontFamily: fonts.primary[400],
+    fontSize: 15,
+    fontFamily: fonts.primary[600],
     color: color,
     textAlign: 'center',
   }),
