@@ -1,10 +1,23 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ILSplash} from '../../assets';
 import {colors, fonts} from '../../utils';
 import {Gap} from '../../components';
 
-const SplashScreen = () => {
+const SplashScreen = ({navigation}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.replace('SignIn');
+      // getData('token').then((res) => {
+      //   if (res) {
+      //     navigation.reset({index: 0, routes: [{name: 'Sigin'}]});
+      //   } else {
+      //     navigation.replace('SignIn');
+      //   }
+      // });
+    }, 2000);
+  }, []);
+
   return (
     <View style={styles.page}>
       <ILSplash />

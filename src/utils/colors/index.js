@@ -28,6 +28,6 @@ export const colors = {
     primary: mainColors.grey2,
     secondary: mainColors.yellow1,
   },
-  // border: mainColors.borderGrey,
+  border: mainColors.black1,
   // cardLight: mainColors.green2,
 };
