@@ -1,7 +1,7 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
-import {FoodCard, Gap, HomeProfile} from '../../components';
-import {FoodDummy1} from '../../assets';
+import {FoodCard, Gap, HomeProfile, HomeTabSection} from '../../components';
+import {FoodDummy1, FoodDummy2, FoodDummy3} from '../../assets';
 
 const Home = () => {
   return (
@@ -11,13 +11,15 @@ const Home = () => {
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.foodCardContainer}>
             <Gap width={20} />
-            <FoodCard />
-            <FoodCard />
-            <FoodCard />
+            <FoodCard name="Soto" image={FoodDummy1} />
+            <FoodCard name="Rawon" image={FoodDummy2} />
+            <FoodCard name="Sate" image={FoodDummy3} />
             <Gap width={20} />
           </View>
         </ScrollView>
-        <View style={styles.tabContainer}>{/* <HomeTabSection /> */}</View>
+      </View>
+      <View style={styles.tabContainer}>
+        <HomeTabSection />
       </View>
     </View>
   );

@@ -2,25 +2,17 @@ import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {FoodDummy1, ICStartOn} from '../../../assets';
 import {colors, fonts} from '../../../utils';
+import Rating from '../Rating';
 
 const FoodCard = ({image, name, rating, onPress}) => {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
       <View style={styles.container}>
-        <Image source={FoodDummy1} style={styles.image} />
+        <Image source={image} style={styles.image} />
         <View style={styles.content}>
-          <Text style={styles.text}>Soto</Text>
-          <View style={styles.ratingContainer}>
-            <View style={styles.startContainer}>
-              <ICStartOn />
-              <ICStartOn />
-              <ICStartOn />
-              <ICStartOn />
-              <ICStartOn />
-            </View>
-            <Text>5</Text>
-          </View>
-          {/* <Rating number={rating} /> */}
+          <Text style={styles.text}>{name}</Text>
+
+          <Rating />
         </View>
       </View>
     </TouchableOpacity>
