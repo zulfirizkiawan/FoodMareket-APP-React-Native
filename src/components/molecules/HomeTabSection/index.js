@@ -18,6 +18,7 @@ import {
 } from '../../../assets';
 import Rating from '../Rating';
 import ItemListFood from '../ItemListFood';
+import {useNavigation} from '@react-navigation/native';
 
 const renderTabBar = props => (
   <TabBar
@@ -41,39 +42,90 @@ const renderTabBar = props => (
 );
 
 const NewTaste = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView>
       <View style={{paddingTop: 10, backgroundColor: colors.white, flex: 1}}>
-        <ItemListFood image={FoodDummy2} />
-        <ItemListFood image={FoodDummy3} />
-        <ItemListFood image={FoodDummy4} />
-        <ItemListFood image={FoodDummy6} />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy2}
+          onPress={() => navigation.navigate('FoodDetail')}
+        />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy3}
+          onPress={() => navigation.navigate('FoodDetail')}
+        />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy4}
+          onPress={() => navigation.navigate('FoodDetail')}
+        />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy6}
+          onPress={() => navigation.navigate('FoodDetail')}
+        />
       </View>
     </ScrollView>
   );
 };
 
 const Populer = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView>
       <View style={{paddingTop: 10, backgroundColor: colors.white, flex: 1}}>
-        <ItemListFood image={FoodDummy3} />
-        <ItemListFood image={FoodDummy6} />
-        <ItemListFood image={FoodDummy2} />
-        <ItemListFood image={FoodDummy4} />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy3}
+          onPress={() => navigation.navigate('FoodDetail')}
+        />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy6}
+          onPress={() => navigation.navigate('FoodDetail')}
+        />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy2}
+          onPress={() => navigation.navigate('FoodDetail')}
+        />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy4}
+          onPress={() => navigation.navigate('FoodDetail')}
+        />
       </View>
     </ScrollView>
   );
 };
 
 const Recommend = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView>
       <View style={{paddingTop: 10, backgroundColor: colors.white, flex: 1}}>
-        <ItemListFood image={FoodDummy4} />
-        <ItemListFood image={FoodDummy6} />
-        <ItemListFood image={FoodDummy3} />
-        <ItemListFood image={FoodDummy2} />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy4}
+          onPress={() => navigation.navigate('FoodDetail')}
+        />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy6}
+          onPress={() => navigation.navigate('FoodDetail')}
+        />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy3}
+          onPress={() => navigation.navigate('FoodDetail')}
+        />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy2}
+          onPress={() => navigation.navigate('FoodDetail')}
+        />
       </View>
     </ScrollView>
   );

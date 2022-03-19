@@ -9,6 +9,7 @@ import ICProfileOff from './ic-profile-off.svg';
 import ICProfileOn from './ic-profile-on.svg';
 import ICStartOff from './ic-star-off.svg';
 import ICStartOn from './ic-star-on.svg';
+import ICBackWhite from './ic-back-white.svg';
 
 export {
   ICBack,
@@ -22,4 +23,5 @@ export {
   ICProfileOn,
   ICStartOff,
   ICStartOn,
+  ICBackWhite,
 };
