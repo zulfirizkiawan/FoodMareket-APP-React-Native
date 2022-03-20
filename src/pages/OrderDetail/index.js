@@ -4,7 +4,7 @@ import {Button, Gap, Header, ItemListFood, ItemValue} from '../../components';
 import {FoodDummy2} from '../../assets';
 import {colors, fonts} from '../../utils';
 
-const OrderSummary = ({navigation}) => {
+const OrderDetail = ({navigation}) => {
   return (
     <ScrollView>
       <Header
@@ -32,7 +32,6 @@ const OrderSummary = ({navigation}) => {
           valueColor="#1ABC9C"
         />
       </View>
-
       <View style={styles.content}>
         <Text style={styles.label}>Deliver to:</Text>
         <ItemValue label="Name" value="Rizkiawan" />
@@ -40,6 +39,14 @@ const OrderSummary = ({navigation}) => {
         <ItemValue label="Address" value="Tajinan" />
         <ItemValue label="House No." value="A5 001" />
         <ItemValue label="City" value="Malang" />
+      </View>
+      <View style={styles.content}>
+        <Text style={styles.label}>Order Status:</Text>
+        <ItemValue
+          label="#FM209391"
+          value="Paid"
+          valueColor={'Paid' === 'CANCELLED' ? '#D9435E' : '#1ABC9C'}
+        />
       </View>
       <View style={styles.content}>
         <View style={styles.button}>
@@ -54,7 +61,7 @@ const OrderSummary = ({navigation}) => {
   );
 };
 
-export default OrderSummary;
+export default OrderDetail;
 
 const styles = StyleSheet.create({
   content: {

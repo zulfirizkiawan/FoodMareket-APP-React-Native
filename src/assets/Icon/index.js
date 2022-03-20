@@ -10,6 +10,7 @@ import ICProfileOn from './ic-profile-on.svg';
 import ICStartOff from './ic-star-off.svg';
 import ICStartOn from './ic-star-on.svg';
 import ICBackWhite from './ic-back-white.svg';
+import ICNext from './ic-next.svg';
 
 export {
   ICBack,
@@ -24,4 +25,5 @@ export {
   ICStartOff,
   ICStartOn,
   ICBackWhite,
+  ICNext,
 };

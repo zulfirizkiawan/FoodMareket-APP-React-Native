@@ -41,7 +41,7 @@ const renderTabBar = props => (
   />
 );
 
-const NewTaste = () => {
+const InProgress = () => {
   const navigation = useNavigation();
   return (
     <ScrollView>
@@ -49,42 +49,45 @@ const NewTaste = () => {
         <ItemListFood
           rating={5}
           image={FoodDummy2}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy3}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy4}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy6}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
+          onPress={() => navigation.navigate('OrderDetail')}
+          type="in-progress"
           items={2}
           price="40.000"
           name="Juss Apa Aja"
         />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy3}
+          onPress={() => navigation.navigate('OrderDetail')}
+          type="in-progress"
+          items={2}
+          price="40.000"
+          name="Juss Teh"
+        />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy4}
+          onPress={() => navigation.navigate('OrderDetail')}
+          type="in-progress"
+          items={2}
+          price="40.000"
+          name="Kopi Kenangan"
+        />
+        <ItemListFood
+          rating={5}
+          image={FoodDummy6}
+          onPress={() => navigation.navigate('OrderDetail')}
+          type="in-progress"
+          items={2}
+          price="40.000"
+          name="Salad"
+        />
       </View>
     </ScrollView>
   );
 };
 
-const Populer = () => {
+const PastOrders = () => {
   const navigation = useNavigation();
   return (
     <ScrollView>
@@ -92,96 +95,64 @@ const Populer = () => {
         <ItemListFood
           rating={5}
           image={FoodDummy3}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
+          onPress={() => navigation.navigate('OrderDetail')}
+          type="past-orders"
+          items={2}
           price="40.000"
-          name="Juss Apa Aja"
+          name="Salad"
+          date="27 10 2022"
+          status="CANCELLED"
         />
         <ItemListFood
           rating={5}
           image={FoodDummy6}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
+          onPress={() => navigation.navigate('OrderDetail')}
+          type="past-orders"
+          items={2}
           price="40.000"
-          name="Juss Apa Aja"
+          name="Salad"
+          date="27 10 2022"
+          status="CANCELLED"
         />
         <ItemListFood
           rating={5}
           image={FoodDummy2}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
+          onPress={() => navigation.navigate('OrderDetail')}
+          type="past-orders"
+          items={2}
           price="40.000"
-          name="Juss Apa Aja"
+          name="Salad"
+          date="27 10 2022"
+          status="SUCCES"
         />
         <ItemListFood
           rating={5}
           image={FoodDummy4}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
+          onPress={() => navigation.navigate('OrderDetail')}
+          type="past-orders"
+          items={2}
           price="40.000"
-          name="Juss Apa Aja"
+          name="Salad"
+          date="27 10 2022"
+          status="CANCELLED"
         />
       </View>
     </ScrollView>
   );
 };
 
-const Recommend = () => {
-  const navigation = useNavigation();
-  return (
-    <ScrollView>
-      <View style={{paddingTop: 10, backgroundColor: colors.white, flex: 1}}>
-        <ItemListFood
-          rating={5}
-          image={FoodDummy4}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy6}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy3}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy2}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-      </View>
-    </ScrollView>
-  );
-};
-
-const HomeTabSection = () => {
+const OrderTabSection = () => {
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: '1', title: 'New Taste'},
-    {key: '2', title: 'Populer'},
-    {key: '3', title: 'Recommend'},
+    {key: '1', title: 'In Progress'},
+    {key: '2', title: 'Past Orders'},
   ]);
 
   const renderScene = SceneMap({
-    1: NewTaste,
-    2: Populer,
-    3: Recommend,
+    1: InProgress,
+    2: PastOrders,
   });
 
   return (
@@ -195,6 +166,6 @@ const HomeTabSection = () => {
   );
 };
 
-export default HomeTabSection;
+export default OrderTabSection;
 
 const styles = StyleSheet.create({});
