@@ -1,9 +1,23 @@
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Gap, Header, TextInput} from '../../components';
-import {colors} from '../../utils';
+import {colors, useForm} from '../../utils';
+import Axios from 'axios';
+import {useDispatch} from 'react-redux';
+import {setLoading, signInAction} from '../../redux/action';
 
 const SignIn = ({navigation}) => {
+  const [form, setFrom] = useForm({
+    email: '',
+    password: '',
+  });
+
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
+    dispatch(signInAction(form, navigation));
+  };
+
   return (
     <View style={styles.page}>
       <Header title="Sign In" subTitle="Find your best ever meal" />
@@ -12,11 +26,19 @@ const SignIn = ({navigation}) => {
         <TextInput
           label="Email Address"
           placeholder="Type your email address"
+          value={form.email}
+          onChangeText={value => setFrom('email', value)}
         />
         <Gap height={16} />
-        <TextInput label="Password" placeholder="Type your password" />
+        <TextInput
+          label="Password"
+          placeholder="Type your password"
+          value={form.password}
+          onChangeText={value => setFrom('password', value)}
+          secureTextEntry
+        />
         <Gap height={24} />
-        <Button color="#FFC700" text="Sign In" />
+        <Button color="#FFC700" text="Sign In" onPress={onSubmit} />
         <Gap height={15} />
         <Button
           color="#8D92A3"

@@ -17,7 +17,9 @@ const SuccessOrder = ({navigation}) => {
       <View style={styles.buttonContainer}>
         <Button
           text="Order Other Foods"
-          onPress={() => navigation.replace('MainApp')}
+          onPress={() =>
+            navigation.reset({index: 0, routes: [{name: 'MainApp'}]})
+          }
         />
       </View>
       <Gap height={12} />

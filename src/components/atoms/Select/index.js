@@ -9,9 +9,8 @@ const Select = ({label, value, onSelectChange}) => {
       <Text style={styles.label}>{label}</Text>
       <View style={styles.input}>
         <Picker
-        //   selectedValue={value}
-        //   onValueChange={itemValue => onSelectChange(itemValue)}
-        >
+          selectedValue={value}
+          onValueChange={itemValue => onSelectChange(itemValue)}>
           <Picker.Item label="Bandung" value="Bandung" />
           <Picker.Item label="Jakarta" value="Jakarta" />
           <Picker.Item label="Semarang" value="Semarang" />
