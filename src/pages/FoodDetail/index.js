@@ -7,10 +7,53 @@ import {
 } from 'react-native';
 import React from 'react';
 import {FoodDummy1, ICBackWhite} from '../../assets';
-import {Rating, Button, Counter} from '../../components';
-import {colors, fonts} from '../../utils';
+import {Rating, Button, Counter, Number} from '../../components';
+import {colors, fonts, getData} from '../../utils';
+import {useState} from 'react';
+import {useEffect} from 'react';
 
-const FoodDetail = ({navigation}) => {
+const FoodDetail = ({navigation, route}) => {
+  const {id, name, description, ingredients, rate, price} = route.params;
+
+  const [totalItem, setTotalItem] = useState(1);
+  const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    getData('userProfile').then(res => {
+      setUserProfile(res);
+    });
+  }, []);
+
+  const onCounterChange = value => {
+    setTotalItem(value);
+  };
+
+  const onOrder = () => {
+    const totalPrice = totalItem * price;
+    const driver = 50000;
+    const tax = (10 / 100) * totalPrice;
+    const total = totalPrice + driver + tax;
+
+    const data = {
+      item: {
+        id,
+        name,
+        price,
+        picturePath,
+      },
+      transaction: {
+        totalItem,
+        totalPrice,
+        driver,
+        tax,
+        total,
+      },
+      userProfile,
+    };
+
+    navigation.navigate('OrderSummary', data);
+  };
+
   return (
     <View style={styles.page}>
       <ImageBackground source={FoodDummy1} style={styles.cover}>
@@ -24,25 +67,20 @@ const FoodDetail = ({navigation}) => {
         <View style={styles.mainContent}>
           <View style={styles.productContainer}>
             <View>
-              <Text style={styles.title}>Soto</Text>
-              <Rating />
+              <Text style={styles.title}>{name}</Text>
+              <Rating number={rate} />
             </View>
-            <Counter />
+            <Counter onValueChange={onCounterChange} />
             {/* <Text>COUNTER</Text> */}
           </View>
-          <Text style={styles.desc}>
-            Makanan khas Bandung yang cukup sering dipesan oleh anak muda dengan
-            pola makan yang cukup tinggi dengan mengutamakan diet yang sehat dan
-            teratur.
-          </Text>
+          <Text style={styles.desc}>{description}</Text>
           <Text style={styles.label}>Ingredients:</Text>
-          <Text style={styles.desc}>Seledri, telur, blueberry, madu.</Text>
+          <Text style={styles.desc}>{ingredients}</Text>
         </View>
         <View style={styles.footer}>
           <View style={styles.priceContainer}>
             <Text style={styles.labelTotal}>Total Price:</Text>
-            <Text style={styles.priceTotal}>IDR 289.000</Text>
-            {/* <Number number={totalItem * price} style={styles.priceTotal} /> */}
+            <Number number={totalItem * price} style={styles.priceTotal} />
           </View>
           <View style={styles.button}>
             <Button

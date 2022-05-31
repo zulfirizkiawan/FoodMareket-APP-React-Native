@@ -4,34 +4,32 @@ import {ICBtnMin, ICBtnPlus} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
 const Counter = ({onValueChange}) => {
-  //   const [value, setValue] = useState(1);
+  const [value, setValue] = useState(1);
 
-  //   useEffect(() => {
-  //     onValueChange(value);
-  //   }, []);
+  useEffect(() => {
+    onValueChange(value);
+  }, []);
 
-  //   const onCount = type => {
-  //     let result = value;
-  //     if (type === 'plus') {
-  //       result = value + 1;
-  //     }
-  //     if (type === 'minus') {
-  //       if (value > 1) {
-  //         result = value - 1;
-  //       }
-  //     }
-  //     setValue(result);
-  //     onValueChange(result);
-  // onPress={() => onCount('minus')}
-  // onPress={() => onCount('plus')}
-  //   };
+  const onCount = type => {
+    let result = value;
+    if (type === 'plus') {
+      result = value + 1;
+    }
+    if (type === 'minus') {
+      if (value > 1) {
+        result = value - 1;
+      }
+    }
+    setValue(result);
+    onValueChange(result);
+  };
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => onCount('minus')}>
         <ICBtnMin />
       </TouchableOpacity>
-      <Text style={styles.value}>14</Text>
-      <TouchableOpacity>
+      <Text style={styles.value}>{value}</Text>
+      <TouchableOpacity onPress={() => onCount('plus')}>
         <ICBtnPlus />
       </TouchableOpacity>
     </View>

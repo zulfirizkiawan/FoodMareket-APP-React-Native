@@ -3,22 +3,16 @@ import {
   Text,
   View,
   useWindowDimensions,
-  Image,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {colors, fonts} from '../../../utils';
-import {
-  FoodDummy1,
-  FoodDummy2,
-  FoodDummy3,
-  FoodDummy4,
-  FoodDummy6,
-} from '../../../assets';
-import Rating from '../Rating';
+import {FoodDummy2, FoodDummy3, FoodDummy4, FoodDummy6} from '../../../assets';
 import ItemListFood from '../ItemListFood';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {getFoodDataByTypes} from '../../../redux/action';
 
 const renderTabBar = props => (
   <TabBar
@@ -43,42 +37,27 @@ const renderTabBar = props => (
 
 const NewTaste = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {newTaste} = useSelector(state => state.homeReducer);
+  useEffect(() => {
+    dispatch(getFoodDataByTypes('newfood'));
+  }, []);
   return (
     <ScrollView>
       <View style={{paddingTop: 10, backgroundColor: colors.white, flex: 1}}>
-        <ItemListFood
-          rating={5}
-          image={FoodDummy2}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy3}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy4}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy6}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          items={2}
-          price="40.000"
-          name="Juss Apa Aja"
-        />
+        {newTaste.map(item => {
+          return (
+            <ItemListFood
+              key={item.id}
+              type="product"
+              name={item.name}
+              price={item.price}
+              rating={item.rate}
+              image={FoodDummy2}
+              onPress={() => navigation.navigate('FoodDetail', item)}
+            />
+          );
+        })}
       </View>
     </ScrollView>
   );
@@ -86,41 +65,27 @@ const NewTaste = () => {
 
 const Populer = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {popular} = useSelector(state => state.homeReducer);
+  useEffect(() => {
+    dispatch(getFoodDataByTypes('popular'));
+  }, []);
   return (
     <ScrollView>
       <View style={{paddingTop: 10, backgroundColor: colors.white, flex: 1}}>
-        <ItemListFood
-          rating={5}
-          image={FoodDummy3}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy6}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy2}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy4}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
+        {popular.map(item => {
+          return (
+            <ItemListFood
+              key={item.id}
+              type="product"
+              name={item.name}
+              price={item.price}
+              rating={item.rate}
+              image={FoodDummy2}
+              onPress={() => navigation.navigate('FoodDetail', item)}
+            />
+          );
+        })}
       </View>
     </ScrollView>
   );
@@ -128,41 +93,27 @@ const Populer = () => {
 
 const Recommend = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {recommended} = useSelector(state => state.homeReducer);
+  useEffect(() => {
+    dispatch(getFoodDataByTypes('recommended'));
+  }, []);
   return (
     <ScrollView>
       <View style={{paddingTop: 10, backgroundColor: colors.white, flex: 1}}>
-        <ItemListFood
-          rating={5}
-          image={FoodDummy4}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy6}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy3}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
-        <ItemListFood
-          rating={5}
-          image={FoodDummy2}
-          onPress={() => navigation.navigate('FoodDetail')}
-          type="product"
-          price="40.000"
-          name="Juss Apa Aja"
-        />
+        {recommended.map(item => {
+          return (
+            <ItemListFood
+              key={item.id}
+              type="product"
+              name={item.name}
+              price={item.price}
+              rating={item.rate}
+              image={FoodDummy2}
+              onPress={() => navigation.navigate('FoodDetail', item)}
+            />
+          );
+        })}
       </View>
     </ScrollView>
   );

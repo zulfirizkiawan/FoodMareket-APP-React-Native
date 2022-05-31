@@ -11,8 +11,7 @@ const FoodCard = ({image, name, rating, onPress}) => {
         <Image source={image} style={styles.image} />
         <View style={styles.content}>
           <Text style={styles.text}>{name}</Text>
-
-          <Rating />
+          <Rating number={rating} />
         </View>
       </View>
     </TouchableOpacity>

@@ -1,8 +1,7 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Gap, Header, TextInput} from '../../components';
-import {colors, useForm} from '../../utils';
-import Axios from 'axios';
+import {colors, getData, useForm} from '../../utils';
 import {useDispatch} from 'react-redux';
 import {setLoading, signInAction} from '../../redux/action';
 

@@ -1,20 +1,19 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {ILSplash} from '../../assets';
-import {colors, fonts} from '../../utils';
+import {colors, fonts, getData} from '../../utils';
 import {Gap} from '../../components';
 
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace('SignIn');
-      // getData('token').then((res) => {
-      //   if (res) {
-      //     navigation.reset({index: 0, routes: [{name: 'Sigin'}]});
-      //   } else {
-      //     navigation.replace('SignIn');
-      //   }
-      // });
+      getData('token').then(res => {
+        if (res) {
+          navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
+        } else {
+          navigation.replace('SignIn');
+        }
+      });
     }, 2000);
   }, []);
 

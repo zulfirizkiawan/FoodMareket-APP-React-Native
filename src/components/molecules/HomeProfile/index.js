@@ -24,7 +24,7 @@ const HomeProfile = () => {
         <Text style={styles.appName}>FoodMarket</Text>
         <Text style={styles.desc}>Let’s get some foods</Text>
       </View>
-      <Image source={photo} style={styles.profile} />
+      <Image source={ProfileDummy} style={styles.profile} />
     </View>
   );
 };

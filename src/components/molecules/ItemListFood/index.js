@@ -3,6 +3,7 @@ import React from 'react';
 import Rating from '../Rating';
 import {FoodDummy1} from '../../../assets';
 import {colors, fonts} from '../../../utils';
+import Number from '../Number';
 
 /*
 TYPE:
@@ -31,10 +32,9 @@ const ItemListFood = ({
           <>
             <View style={styles.content}>
               <Text style={styles.nameFood}>{name}</Text>
-              <Text style={styles.idr}>IDR {price}</Text>
-              {/* <Number number={idr} style={styles.idr} /> */}
+              <Number number={price} style={styles.idr} />
             </View>
-            <Rating rating={rating} />
+            <Rating number={rating} />
           </>
         );
       case 'order-summary':
@@ -43,8 +43,7 @@ const ItemListFood = ({
           <>
             <View style={styles.content}>
               <Text style={styles.nameFood}>{name}</Text>
-              {/* <Number number={idr} style={styles.idr} /> */}
-              <Text style={styles.idr}>IDR {price}</Text>
+              <Number number={price} style={styles.idr} />
             </View>
             <Text style={styles.items}>{items} items</Text>
           </>
@@ -58,8 +57,7 @@ const ItemListFood = ({
               <View style={styles.row}>
                 <Text style={styles.idr}>{items} items</Text>
                 <View style={styles.dot} />
-                <Text style={styles.idr}>IDR {price}</Text>
-                {/* <Number number={idr} style={styles.idr} /> */}
+                <Number number={price} style={styles.idr} />
               </View>
             </View>
           </>
@@ -74,8 +72,7 @@ const ItemListFood = ({
               <View style={styles.row}>
                 <Text style={styles.idr}>{items}2 items</Text>
                 <View style={styles.dot} />
-                <Text style={styles.idr}>IDR {price}</Text>
-                {/* <Number number={idr} style={styles.idr} /> */}
+                <Number number={price} style={styles.idr} />
               </View>
             </View>
             <View>
@@ -90,8 +87,7 @@ const ItemListFood = ({
           <>
             <View style={styles.content}>
               <Text style={styles.nameFood}>{name}</Text>
-              <Text style={styles.idr}>IDR {price}</Text>
-              {/* <Number number={idr} style={styles.idr} /> */}
+              <Number number={price} style={styles.idr} />
             </View>
             <Rating />
           </>
