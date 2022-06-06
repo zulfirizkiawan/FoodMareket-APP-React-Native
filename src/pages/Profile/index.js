@@ -1,22 +1,98 @@
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ProfileDummy} from '../../assets';
-import {colors, fonts} from '../../utils';
+import {colors, fonts, getData, showMessage, storeData} from '../../utils';
 import {ProfileTabSection} from '../../components';
+import {launchImageLibrary} from 'react-native-image-picker';
+import Axios from 'axios';
 
-const Profile = () => {
+const Profile = ({navigation}) => {
+  const [userProfile, setUserProfile] = useState({});
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      updateUserProfile();
+    });
+  }, [navigation]);
+
+  const updateUserProfile = () => {
+    getData('userProfile').then(res => {
+      console.log('user :', res);
+      setUserProfile(res);
+    });
+  };
+
+  useEffect(() => {
+    getData('token').then(res => {
+      // console.log('token :', res);
+      setToken(res.value);
+    });
+  }, []);
+
+  const updatePhoto = () => {
+    launchImageLibrary(
+      {
+        quality: 0.7,
+        maxWidth: 200,
+        maxHeight: 200,
+      },
+      response => {
+        console.log('response :', response);
+        if (response.didCancel || response.error) {
+          showMessage('Anda tidak memilih photo');
+        } else {
+          const dataImage = {
+            uri: response.uri,
+            type: response.type,
+            name: response.fileName,
+          };
+          const photoForUpload = new FormData();
+          photoForUpload.append('file', dataImage);
+
+          Axios.post(
+            'http://otwlulus.com/foodmarket-backend/public/api/user/photo',
+            photoForUpload,
+            {
+              headers: {
+                Authorization: token,
+                'Content-Type': 'multipart/form-data',
+              },
+            },
+          )
+            .then(res => {
+              getData('userProfile').then(resUser => {
+                showMessage('Update Photo Berhasil', 'success');
+                resUser.profile_photo_url = `http://otwlulus.com/foodmarket-backend/public/storage/${res.data.data[0]}`;
+                storeData('userProfile', resUser).then(() => {
+                  updateUserProfile();
+                });
+              });
+            })
+            .catch(err => {
+              console.log('error :', err);
+              showMessage('Terjadi kesalahan di API Update Photo');
+            });
+        }
+      },
+    );
+  };
+
   return (
     <View style={styles.page}>
       <View style={styles.profileDetail}>
         <View style={styles.photo}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={updatePhoto}>
             <View style={styles.borderPhoto}>
-              <Image source={ProfileDummy} style={styles.photoContainer} />
+              <Image
+                source={{uri: userProfile.profile_photo_url}}
+                style={styles.photoContainer}
+              />
             </View>
           </TouchableOpacity>
         </View>
-        <Text style={styles.name}>zulfi rizkiawan</Text>
-        <Text style={styles.email}>zuki@gmail.com</Text>
+        <Text style={styles.name}>{userProfile.name}</Text>
+        <Text style={styles.email}>{userProfile.email}</Text>
       </View>
       <View style={styles.content}>
         <ProfileTabSection />

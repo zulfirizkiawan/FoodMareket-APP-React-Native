@@ -53,7 +53,10 @@ const Account = () => {
   return (
     <ScrollView>
       <View style={{paddingTop: 10, backgroundColor: colors.white, flex: 1}}>
-        <ItemListMenu text="Edit Profile" />
+        <ItemListMenu
+          text="Edit Profile"
+          onPress={() => navigation.navigate('EditProfile')}
+        />
         <ItemListMenu text="Home Address" />
         <ItemListMenu text="Security" />
         <ItemListMenu text="Payments" />

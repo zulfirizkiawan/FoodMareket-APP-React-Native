@@ -53,7 +53,7 @@ const NewTaste = () => {
               name={item.name}
               price={item.price}
               rating={item.rate}
-              image={FoodDummy2}
+              image={{uri: item.picturePath}}
               onPress={() => navigation.navigate('FoodDetail', item)}
             />
           );
@@ -81,7 +81,7 @@ const Populer = () => {
               name={item.name}
               price={item.price}
               rating={item.rate}
-              image={FoodDummy2}
+              image={{uri: item.picturePath}}
               onPress={() => navigation.navigate('FoodDetail', item)}
             />
           );
@@ -109,7 +109,7 @@ const Recommend = () => {
               name={item.name}
               price={item.price}
               rating={item.rate}
-              image={FoodDummy2}
+              image={{uri: item.picturePath}}
               onPress={() => navigation.navigate('FoodDetail', item)}
             />
           );

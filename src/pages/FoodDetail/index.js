@@ -5,15 +5,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {FoodDummy1, ICBackWhite} from '../../assets';
 import {Rating, Button, Counter, Number} from '../../components';
 import {colors, fonts, getData} from '../../utils';
-import {useState} from 'react';
-import {useEffect} from 'react';
 
 const FoodDetail = ({navigation, route}) => {
-  const {id, name, description, ingredients, rate, price} = route.params;
+  const {id, name, description, picturePath, ingredients, rate, price} =
+    route.params;
 
   const [totalItem, setTotalItem] = useState(1);
   const [userProfile, setUserProfile] = useState({});
@@ -30,7 +29,7 @@ const FoodDetail = ({navigation, route}) => {
 
   const onOrder = () => {
     const totalPrice = totalItem * price;
-    const driver = 50000;
+    const driver = 10000;
     const tax = (10 / 100) * totalPrice;
     const total = totalPrice + driver + tax;
 
@@ -50,13 +49,13 @@ const FoodDetail = ({navigation, route}) => {
       },
       userProfile,
     };
-
+    console.log('checkout :', data);
     navigation.navigate('OrderSummary', data);
   };
 
   return (
     <View style={styles.page}>
-      <ImageBackground source={FoodDummy1} style={styles.cover}>
+      <ImageBackground source={{uri: picturePath}} style={styles.cover}>
         <TouchableOpacity
           style={styles.back}
           onPress={() => navigation.goBack()}>
@@ -83,10 +82,7 @@ const FoodDetail = ({navigation, route}) => {
             <Number number={totalItem * price} style={styles.priceTotal} />
           </View>
           <View style={styles.button}>
-            <Button
-              text="Order Now"
-              onPress={() => navigation.navigate('OrderSummary')}
-            />
+            <Button text="Order Now" onPress={onOrder} />
           </View>
         </View>
       </View>

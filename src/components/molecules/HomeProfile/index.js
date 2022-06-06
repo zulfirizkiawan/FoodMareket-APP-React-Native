@@ -24,7 +24,7 @@ const HomeProfile = () => {
         <Text style={styles.appName}>FoodMarket</Text>
         <Text style={styles.desc}>Let’s get some foods</Text>
       </View>
-      <Image source={ProfileDummy} style={styles.profile} />
+      <Image source={photo} style={styles.profile} />
     </View>
   );
 };
@@ -42,5 +42,5 @@ const styles = StyleSheet.create({
   },
   appName: {fontSize: 22, fontFamily: fonts.primary[600], color: '#020202'},
   desc: {fontSize: 14, fontFamily: fonts.primary[400], color: '#8D92A3'},
-  profile: {width: 60, height: 60, borderRadius: 30},
+  profile: {width: 60, height: 60, borderRadius: 10},
 });

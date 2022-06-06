@@ -22,7 +22,7 @@ const Home = ({navigation}) => {
               return (
                 <FoodCard
                   key={itemFood.id}
-                  image={FoodDummy1}
+                  image={{uri: itemFood.picturePath}}
                   name={itemFood.name}
                   rating={itemFood.rate}
                   onPress={() => navigation.navigate('FoodDetail', itemFood)}

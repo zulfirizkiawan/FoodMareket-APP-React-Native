@@ -2,6 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
+  EditProfile,
   FoodDetail,
   Home,
   Order,
@@ -84,6 +85,11 @@ const Router = () => {
       <Stack.Screen
         name="OrderDetail"
         component={OrderDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfile}
         options={{headerShown: false}}
       />
       <Stack.Screen
