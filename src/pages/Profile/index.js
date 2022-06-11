@@ -50,10 +50,21 @@ const Profile = ({navigation}) => {
           const photoForUpload = new FormData();
           photoForUpload.append('file', dataImage);
 
-          Axios.post(
+          // Axios.post(
+          //   'http://otwlulus.com/foodmarket-backend/public/api/user/photo',
+          //   photoForUpload,
+          //   {
+          //     headers: {
+          //       Authorization: token,
+          //       'Content-Type': 'multipart/form-data',
+          //     },
+          //   },
+          // )
+          fetch(
             'http://otwlulus.com/foodmarket-backend/public/api/user/photo',
             photoForUpload,
             {
+              method: 'POST',
               headers: {
                 Authorization: token,
                 'Content-Type': 'multipart/form-data',
@@ -61,7 +72,9 @@ const Profile = ({navigation}) => {
             },
           )
             .then(res => {
+              console.log('res tes :', res);
               getData('userProfile').then(resUser => {
+                console.log('res tes 2:', resUser);
                 showMessage('Update Photo Berhasil', 'success');
                 resUser.profile_photo_url = `http://otwlulus.com/foodmarket-backend/public/storage/${res.data.data[0]}`;
                 storeData('userProfile', resUser).then(() => {

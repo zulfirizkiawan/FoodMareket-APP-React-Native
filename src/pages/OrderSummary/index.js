@@ -14,16 +14,8 @@ import {WebView} from 'react-native-webview';
 
 const OrderSummary = ({navigation, route}) => {
   const {item, transaction, userProfile} = route.params;
-  const [token, setToken] = useState('');
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [paymentURL, setPaymentURL] = useState('https://google.com');
-
-  useEffect(() => {
-    getData('token').then(res => {
-      // console.log('token :', res);
-      setToken(res.value);
-    });
-  }, []);
 
   const onCheckout = () => {
     const data = {
@@ -34,23 +26,25 @@ const OrderSummary = ({navigation, route}) => {
       status: 'PENDING',
     };
 
-    Axios.post(
-      'http://otwlulus.com/foodmarket-backend/public/api/checkout',
-      data,
-      {
-        headers: {
-          Authorization: token,
+    getData('token').then(resToken => {
+      Axios.post(
+        'http://otwlulus.com/foodmarket-backend/public/api/checkout',
+        data,
+        {
+          headers: {
+            Authorization: resToken.value,
+          },
         },
-      },
-    )
-      .then(res => {
-        console.log('checkout sukses :', res.data);
-        setIsPaymentOpen(true);
-        setPaymentURL(res.data.data.payment_url);
-      })
-      .catch(err => {
-        console.log('checkout error :', err);
-      });
+      )
+        .then(res => {
+          console.log('checkout sukses :', res.data);
+          setIsPaymentOpen(true);
+          setPaymentURL(res.data.data.payment_url);
+        })
+        .catch(err => {
+          console.log('checkout error :', err);
+        });
+    });
   };
 
   const onNavChange = state => {
@@ -59,7 +53,7 @@ const OrderSummary = ({navigation, route}) => {
     //   'https://app.sandbox.midtrans.com/snap/v3/redirection/282fc119-9bcf-47b4-9f78-273e69ebb5a0';
     const titleWeb = 'Laravel';
     if (state.title === titleWeb) {
-      navigation.replace('SuccessOrder');
+      navigation.reset({index: 0, routes: [{name: 'SuccessOrder'}]});
     }
   };
 
