@@ -31,22 +31,27 @@ const SignUp = ({navigation}) => {
   const addPhoto = () => {
     launchImageLibrary(
       {
-        quality: 0.5,
-        maxWidth: 200,
-        maxHeight: 200,
+        title: 'Select Image',
+        type: 'library',
+        options: {
+          maxWidth: 200,
+          maxHeight: 200,
+          selectionLimit: 1,
+          mediaType: 'photo',
+          includeBase64: false,
+        },
       },
       response => {
-        console.log('response :', response);
-
         if (response.didCancel || response.error) {
           showMessage('Anda Tidak Memilih Foto');
         } else {
           const source = {uri: response.assets[0].uri};
           const dataImage = {
-            uri: response.uri,
-            type: response.type,
-            name: response.fileName,
+            uri: response.assets[0].uri,
+            type: response.assets[0].type,
+            name: response.assets[0].fileName,
           };
+          console.log('response :', response.assets[0]);
 
           setPhoto(source);
           dispatch({type: 'SET_PHOTO', value: dataImage});

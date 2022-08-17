@@ -18,77 +18,64 @@ const Profile = ({navigation}) => {
 
   const updateUserProfile = () => {
     getData('userProfile').then(res => {
-      console.log('user :', res);
       setUserProfile(res);
     });
   };
 
   useEffect(() => {
     getData('token').then(res => {
-      // console.log('token :', res);
       setToken(res.value);
     });
   }, []);
 
-  const updatePhoto = () => {
-    launchImageLibrary(
-      {
-        quality: 0.7,
-        maxWidth: 200,
-        maxHeight: 200,
-      },
-      response => {
-        console.log('response :', response);
-        if (response.didCancel || response.error) {
-          showMessage('Anda tidak memilih photo');
-        } else {
-          const dataImage = {
-            uri: response.uri,
-            type: response.type,
-            name: response.fileName,
-          };
-          const photoForUpload = new FormData();
-          photoForUpload.append('file', dataImage);
+  const options = {
+    title: 'Select Image',
+    type: 'library',
+    options: {
+      maxWidth: 200,
+      maxHeight: 200,
+      selectionLimit: 1,
+      mediaType: 'photo',
+      includeBase64: false,
+    },
+  };
 
-          // Axios.post(
-          //   'http://otwlulus.com/foodmarket-backend/public/api/user/photo',
-          //   photoForUpload,
-          //   {
-          //     headers: {
-          //       Authorization: token,
-          //       'Content-Type': 'multipart/form-data',
-          //     },
-          //   },
-          // )
-          fetch(
-            'http://otwlulus.com/foodmarket-backend/public/api/user/photo',
-            photoForUpload,
-            {
-              method: 'POST',
-              headers: {
-                Authorization: token,
-                'Content-Type': 'multipart/form-data',
-              },
-            },
-          )
-            .then(res => {
-              console.log('res tes :', res);
-              getData('userProfile').then(resUser => {
-                console.log('res tes 2:', resUser);
-                showMessage('Update Photo Berhasil', 'success');
-                resUser.profile_photo_url = `http://otwlulus.com/foodmarket-backend/public/storage/${res.data.data[0]}`;
-                storeData('userProfile', resUser).then(() => {
-                  updateUserProfile();
-                });
-              });
-            })
-            .catch(err => {
-              console.log('error :', err);
-              showMessage('Terjadi kesalahan di API Update Photo');
+  const updatePhoto = async () => {
+    const images = await launchImageLibrary(options);
+    console.log(images.assets[0]);
+    const dataImage = {
+      uri: images.assets[0].uri,
+      type: images.assets[0].type,
+      name: images.assets[0].fileName,
+    };
+    const photoForUpload = new FormData();
+    photoForUpload.append('file', dataImage);
+    getData('token').then(resToken => {
+      fetch('http://otwlulus.com/foodmarket-backend/public/api/user/photo', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+          Authorization: resToken.value,
+        },
+        body: photoForUpload,
+      })
+        .then(response => response.json())
+        .then(responseJson => {
+          console.log('response object:', responseJson.data);
+          getData('userProfile').then(resUser => {
+            showMessage('Update Photo Berhasil', 'success');
+            resUser.profile_photo_url = `http://otwlulus.com/foodmarket-backend/public/storage/${responseJson.data[0]}`;
+            storeData('userProfile', resUser).then(() => {
+              updateUserProfile();
             });
-        }
-      },
-    );
+          });
+        })
+        .catch(err => {
+          console.log('error :', err);
+          showMessage('Terjadi kesalahan di API Update Photo');
+        });
+    });
   };
 
   return (

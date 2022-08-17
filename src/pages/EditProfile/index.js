@@ -75,7 +75,7 @@ const EditProfile = ({navigation}) => {
           <TextInput
             label="Phone Number"
             placeholder="Type your phone number"
-            value={form.email}
+            value={form.phoneNumber}
             onChangeText={value => setForm('phoneNumber', value)}
           />
           <Gap height={16} />
